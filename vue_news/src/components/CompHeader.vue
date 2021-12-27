@@ -1,7 +1,7 @@
 <template>
     <div class="header">
-        <router-link to="/news">news</router-link>
-        <router-link to="/asks">asks</router-link>
+        <router-link to="/news">news</router-link> |
+        <router-link to="/asks">asks</router-link> |
         <router-link to="/jobs">jobs</router-link>
     </div>
 </template>
@@ -43,6 +43,5 @@ export default {
     }
     .router-link-exact-active{
         color:blue;
-        text-decoration: underline;
     }
 </style>
