@@ -1,11 +1,10 @@
 <template>
     <div>
-        <div v-for="data in news" :key="data">{{data.title}}</div>
+        <div v-for="data in this.$store.state.news" :key="data">{{data.title}}</div>
     </div>
 </template>
 
 <script>
-import { fetchNewsList } from '../api/api.js'
 
 export default {
 
@@ -15,9 +14,7 @@ export default {
         };
     },
     created(){
-        fetchNewsList()
-        .then(response => this.news = response.data)
-        .catch(error => console.log(error))
+        this.$store.dispatch('FETCH_NEWS');
     },
     mounted() {
         

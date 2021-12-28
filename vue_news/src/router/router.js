@@ -7,7 +7,12 @@ import JobsView from '../views/JobsView.vue';
 Vue.use(VueRouter);
 
 const router = new VueRouter({
+    mode:'history',
     routes:[
+        {
+            path:'/',
+            redirect:'/news'
+        },
         {
             path:'/news',
             component:NewsView,
