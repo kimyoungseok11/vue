@@ -2,7 +2,7 @@
     <div>
         <!-- <div v-for="data in fetchedAsk" :key="data">{{data.title}}</div> -->
         <p v-for="data in fetchedAsk" :key="data">
-            <a v-bind:href="data.url">{{data.title}}</a>
+            <router-link :to="`/item/${data.id}`">{{data.title}}</router-link>
             <small> {{data.time_ago}}, {{data.user}}</small>
         </p>
     </div>

@@ -1,7 +1,9 @@
 <template>
     <div>
         <comp-header></comp-header>
-        <router-view></router-view>
+        <transition name='page'>
+          <router-view></router-view>
+        </transition>
     </div>
 </template>
 
@@ -13,7 +15,6 @@ export default {
     components:{
       CompHeader
     },
-
     data() {
         return {
             
@@ -34,5 +35,11 @@ export default {
   *{
     margin:0;
     padding:0
+  }
+  .page-enter-active, .page-leave-active {
+  transition: opacity .5s;
+  }
+  .page-enter, .page-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 </style>
