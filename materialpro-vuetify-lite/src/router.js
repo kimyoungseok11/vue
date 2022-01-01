@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
-    mode: 'hash',
+    mode: 'history',
     base: process.env.BASE_URL,
     routes: [
         {
@@ -23,18 +23,6 @@ export default new Router({
                     name: 'Profile',
                     path: 'pages/profile',
                     component: () => import('@/views/pages/Profile'),
-                },
-
-                {
-                    name: 'Icons',
-                    path: 'pages/icons',
-                    component: () => import('@/views/pages/Icons'),
-                },
-
-                {
-                    name: 'TableSimple',
-                    path: 'pages/tables-simple',
-                    component: () => import('@/views/pages/TableSimple'),
                 },
 
                 {

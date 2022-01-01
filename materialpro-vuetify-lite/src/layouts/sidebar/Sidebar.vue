@@ -4,23 +4,22 @@
     :dark="SidebarColor !== 'white'"
     :color="SidebarColor"
     mobile-break-point="960"
-    clipped
-    :right="$vuetify.rtl"
-    mini-variant-width="70"
-    :expand-on-hover="expandOnHover"
     app
     id="main-sidebar"
   >
     <v-list dense nav>
       <!---USer Area -->
       <v-list-item two-line class="px-0">
-        <v-list-item-avatar>
-          <img src="https://randomuser.me/api/portraits/men/81.jpg" />
-        </v-list-item-avatar>
-
         <v-list-item-content>
-          <v-list-item-title>Dohn Deo</v-list-item-title>
-          <v-list-item-subtitle class="caption">Webdesigner</v-list-item-subtitle>
+          <v-list-item-subtitle class="caption">Smart Sensor</v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-content>
+          <v-icon 
+          style="position:absolute; right:0px"
+          @click="$vuetify.breakpoint ? setSidebarDrawer(!Sidebar_drawer) : $emit('input', !value)"
+          >
+          mdi-close
+          </v-icon>
         </v-list-item-content>
       </v-list-item>
       <!---USer Area -->
@@ -34,6 +33,7 @@
       >
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>
+          <!-- <font-awesome-icon :icon="item.icon" style="width:20px"></font-awesome-icon> -->
         </v-list-item-icon>
 
         <v-list-item-content>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "Sidebar",
@@ -59,34 +59,25 @@ export default {
   data: () => ({
     items: [
       {
-        title: "Dashboard",
-        icon: "mdi-view-dashboard",
+        title: "실시간 모니터링",
+        // icon: "mdi-view-dashboard",
+        icon: "mdi-monitor",
         to: "/dashboard/basic-dashboard"
       },
 
       {
-        title: "Profile",
-        icon: "mdi-account-circle",
+        title: "미세먼지 지표",
+        // icon: "mdi-account-circle",
+        icon: "mdi-alert-circle",
         to: "/pages/profile"
       },
 
       {
-        title: "Alerts",
-        icon: "mdi-alert",
+        title: "항목 별 통계",
+        // icon: "mdi-alert",
+        icon: "mdi-chart-areaspline-variant",
         to: "/pages/alerts"
       },
-
-      {
-        title: "Icons",
-        icon: "mdi-emoticon",
-        to: "/pages/icons"
-      },
-
-      {
-        title: "Basic Table",
-        icon: "mdi-table-column-width",
-        to: "/pages/tables-simple"
-      }
     ]
   }),
   computed: {
@@ -97,7 +88,8 @@ export default {
       },
       set(val) {
         this.$store.commit("SET_SIDEBAR_DRAWER", val);
-      }
+      },
+      ...mapState(["Sidebar_drawer"])
     }
   },
   watch: {
@@ -106,7 +98,11 @@ export default {
     }
   },
 
-  methods: {}
+  methods: {
+    ...mapMutations({
+      setSidebarDrawer: "SET_SIDEBAR_DRAWER"
+    })
+  }
 };
 </script>
 <style lang="scss">
@@ -126,8 +122,7 @@ export default {
         text-align: center;
         width: 20px;
         
-      }
-      
+    } 
   }    
 }
 </style>
