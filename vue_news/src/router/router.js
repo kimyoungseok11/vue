@@ -18,14 +18,17 @@ const router = new VueRouter({
         {
             path:'/news',
             component:NewsView,
+            name:'news'
         },
         {
             path:'/asks',
             component:AsksView,
+            name:'asks'
         },
         {
             path:'/jobs',
             component:JobsView,
+            name:'jobs'
         },
         {
             path:'/user/:id',
