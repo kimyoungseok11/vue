@@ -1,20 +1,16 @@
 <template>
     <div>
         <section>
-            <!-- 질문 상세 정보 -->
-            <div class="user-container">
-                <div>
-                    <font-awesome-icon :icon="['fas','user']"></font-awesome-icon>
-                </div>
-                <div class="user-description">
-                    <router-link :to="`/user/${itemInfo.user}`">
-                        {{itemInfo.user}}
-                    </router-link>
-                    <div class="time">
-                        {{itemInfo.time_ago}}
-                    </div>
-                </div>
-            </div>
+            <!-- 사용자 상세 정보 -->
+            <user-profile :info="itemInfo">
+                <!-- <div slot="username">{{ itemInfo.user }}</div> -->
+                <router-link slot="username" :to="`/user/${itemInfo.user}`">
+                    {{itemInfo.user}}
+                </router-link>
+                <template slot="time">{{ 'Posted' + itemInfo.time_ago }}</template>
+            </user-profile>
+        </section>
+        <section>
             <h2>{{itemInfo.title}}</h2>
         </section>
         <section>
@@ -27,9 +23,14 @@
 </template>
 
 <script>
+import UserProfile from '../components/UserProfile.vue'
 
 export default {
     name: 'VueNewsItemview',
+
+    components:{
+        UserProfile
+    },
 
     data() {
         return {
