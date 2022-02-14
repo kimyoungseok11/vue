@@ -2,31 +2,47 @@
     <div>
         <comp-header></comp-header>
         <transition name='page'>
-          <router-view></router-view>
+          <router-view mode="out-in"></router-view>
         </transition>
+        <spinner :loading="loadingStatus"></spinner>
     </div>
 </template>
 
 <script>
 import CompHeader from './components/CompHeader.vue'
+import Spinner from './components/Spinner.vue'
+import bus from './utils/bus.js'
 
 export default {
     name: 'VueNewsHeader',
     components:{
-      CompHeader
+      CompHeader,
+      Spinner
     },
     data() {
-        return {
-            
-        };
+      return {
+        loadingStatus:false,
+      }
     },
-
+    created() {
+      bus.$on('start:spinner',this.startSpinner);
+      bus.$on('end:spinner',this.endSpinner);
+    },
+    beforeDestroy() {
+      bus.$off('start:spinner',this.startSpinner);
+      bus.$off('end:spinner',this.endSpinner);
+    },
     mounted() {
         
     },
 
     methods: {
-        
+      startSpinner(){
+        this.loadingStatus = true;
+      },
+      endSpinner(){
+        this.loadingStatus = false;
+      }
     },
 };
 </script>
